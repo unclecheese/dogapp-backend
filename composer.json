@@ -22,5 +22,10 @@
         "process-timeout": 600
     },
     "prefer-stable": true,
-    "minimum-stability": "dev"
+    "minimum-stability": "dev",
+    "autoload": {
+        "psr-4": {
+            "MyOrg\\": "app/src/"
+        }
+    }
 }
