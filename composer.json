@@ -9,7 +9,7 @@
         "silverstripe/assets": "1.0.0@stable",
         "silverstripe/config": "1.0.0@stable",
         "silverstripe/framework": "4.0.0@stable",
-        "silverstripe/graphql": "^1.0",
+        "silverstripe/graphql": "1.0.x-dev",
         "silverstripe/graphql-devtools": "dev-master",
         "silverstripe/sqlite3": "dev-master",
         "silverstripe/versioned": "^1.0"

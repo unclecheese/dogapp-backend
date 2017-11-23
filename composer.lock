@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "2aeaf323004a896e7a561c859de01b8a",
+    "content-hash": "5cc7e0c36e661fbf14505b7ab3f03263",
     "packages": [
         {
             "name": "composer/ca-bundle",
@@ -1189,16 +1189,16 @@
         },
         {
             "name": "silverstripe/graphql",
-            "version": "1.0.0",
+            "version": "1.0.x-dev",
             "source": {
                 "type": "git",
                 "url": "https://github.com/silverstripe/silverstripe-graphql.git",
-                "reference": "f39f351a0319dd97e00596dc3163af55ed368bfc"
+                "reference": "8dae954a25f3fad9b65f5a28b6134dc575f89d50"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/silverstripe/silverstripe-graphql/zipball/f39f351a0319dd97e00596dc3163af55ed368bfc",
-                "reference": "f39f351a0319dd97e00596dc3163af55ed368bfc",
+                "url": "https://api.github.com/repos/silverstripe/silverstripe-graphql/zipball/8dae954a25f3fad9b65f5a28b6134dc575f89d50",
+                "reference": "8dae954a25f3fad9b65f5a28b6134dc575f89d50",
                 "shasum": ""
             },
             "require": {
@@ -1220,7 +1220,7 @@
             },
             "notification-url": "https://packagist.org/downloads/",
             "description": "GraphQL server for SilverStripe models and other data",
-            "time": "2017-11-01T01:01:07+00:00"
+            "time": "2017-11-21 01:27:09"
         },
         {
             "name": "silverstripe/graphql-devtools",
@@ -3325,6 +3325,7 @@
         "silverstripe/assets": 0,
         "silverstripe/config": 0,
         "silverstripe/framework": 0,
+        "silverstripe/graphql": 20,
         "silverstripe/graphql-devtools": 20,
         "silverstripe/sqlite3": 20
     },
