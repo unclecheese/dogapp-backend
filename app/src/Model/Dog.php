@@ -1,12 +1,15 @@
 <?php
 namespace MyOrg\Model;
 
+use SilverStripe\GraphQL\Scaffolding\Interfaces\ScaffoldingProvider;
+use SilverStripe\GraphQL\Scaffolding\Scaffolders\SchemaScaffolder;
+use GraphQL\Type\Definition\ResolveInfo;
 use SilverStripe\ORM\DataObject;
 use SilverStripe\Assets\Image;
 use SilverStripe\Security\Member;
 use SilverStripe\Security\Security;
 
-class Dog extends DataObject
+class Dog extends DataObject implements ScaffoldingProvider
 {
     private static $db = [
         'Name' => 'Varchar(255)',
@@ -60,5 +63,46 @@ class Dog extends DataObject
         if ($this->Image()->exists()) {
             $this->Image()->copyVersionToStage('Stage', 'Live');
         }
+    }
+
+    public function provideGraphQLScaffolding(SchemaScaffolder $scaffolder)
+    {
+        $scaffolder
+            ->mutation('toggleFavourite', __CLASS__)
+            ->addArgs([
+                'DogID' => 'ID!',
+                'Favourite' => 'Boolean!',
+            ])
+            ->setResolver(function ($object, array $args, $context, ResolveInfo $info) {
+                $dog = self::get()->byID($args['DogID']);
+                if (!$dog) {
+                    throw new \InvalidArgumentException(sprintf(
+                        'Dog #%s does not exist',
+                        $args['DogID']
+                    ));
+                }
+                $params = [
+                    'DogID' => $dog->ID,
+                    'MemberID' => $context['currentUser']->ID
+                ];
+
+                $existing = DogFavourite::get()->filter($params)->first();
+
+                if ((boolean)$existing === $args['Favourite']) {
+                    return $dog;
+                }
+
+                if ($args['Favourite']) {
+                    $favourite = DogFavourite::create($params);
+                    $favourite->write();
+                } else {
+                    $existing->delete();
+                }
+
+                return $dog;
+
+            });
+
+        return $scaffolder;
     }
 }

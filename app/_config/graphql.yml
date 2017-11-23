@@ -11,6 +11,7 @@ SilverStripe\GraphQL\Controller:
     Allow-Methods:  'GET, POST, OPTIONS'
     Max-Age: 86400
   schema:
+    scaffolding_providers: [MyOrg\Model\Dog]
     scaffolding:
       types:
         SilverStripe\Security\Member:
