@@ -16,3 +16,6 @@ SilverStripe\Core\Injector\Injector:
       - "info"
 SilverStripe\i18n\i18n:
   default_locale: 'en_US'
+SilverStripe\Security\Member:
+  extensions:
+    - MyOrg\Extension\DogOwner
