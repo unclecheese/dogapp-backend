@@ -4,6 +4,7 @@ namespace MyOrg\Model;
 use SilverStripe\ORM\DataObject;
 use SilverStripe\Assets\Image;
 use SilverStripe\Security\Member;
+use SilverStripe\Security\Security;
 
 class Dog extends DataObject
 {
@@ -17,7 +18,23 @@ class Dog extends DataObject
         'Image' => Image::class
     ];
 
+    private static $many_many = [
+        'FavouritingMembers' => [
+            'through' => DogFavourite::class,
+            'from' => 'Dog',
+            'to' => 'Member',
+        ],
+    ];
+
+    private static $has_many = [
+        'Favourites' => DogFavourite::class,
+    ];
+
     private static $default_sort = 'Created DESC';
+
+    private static $casting = [
+        'IsFavourite' => 'Boolean'
+    ];
 
     public function getThumbnail()
     {
@@ -29,6 +46,13 @@ class Dog extends DataObject
         return true;
     }
 
+    public function getIsFavourite()
+    {
+        $memberID = Security::getCurrentUser()->ID;
+
+        return (boolean)$this->FavouritingMembers()->byID($memberID);
+    }
+
     public function onAfterWrite()
     {
         parent::onAfterWrite();
@@ -37,5 +61,4 @@ class Dog extends DataObject
             $this->Image()->copyVersionToStage('Stage', 'Live');
         }
     }
-
 }

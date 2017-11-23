@@ -18,17 +18,29 @@ SilverStripe\GraphQL\Controller:
           operations:
             read: true
           nestedQueries:
+            FavouriteDogs:
+              paginate: false
             Dogs:
               paginate: false
         MyOrg\Model\Dog:
-          fields: [ID, Name, Breed, Owner, Thumbnail]
+          fields: [ID, Name, Breed, Owner, Thumbnail, IsFavourite]
           operations:
             read:
               paginate: true
+          nestedQueries:
+            Favourites:
+              paginate: false
+            FavouritingMembers:
+              paginate: false
         MyOrg\Model\DogBreed:
           fields: [ID, Name]
           operations:
             read: true
+        MyOrg\Model\DogFavourite:
+          fields: [ID, Member, Dog, IsMine]
+          operations:
+            create: true
+            delete: true
 ---
 Name: app-graphqlroutes
 After:
