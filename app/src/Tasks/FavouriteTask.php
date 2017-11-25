@@ -7,6 +7,7 @@ use MyOrg\Model\DogBreed;
 use MyOrg\Model\DogFavourite;
 use SilverStripe\Assets\Folder;
 use SilverStripe\Assets\File;
+use SilverStripe\Control\HTTPRequest;
 use SilverStripe\Dev\BuildTask;
 use Faker\Factory;
 use SilverStripe\Security\Member;
@@ -16,6 +17,11 @@ class FavouriteTask extends BuildTask
 {
     private static $segment = 'populate-favourites';
 
+    /**
+     * Seed some favourites in to the database
+     *
+     * @param HTTPRequest $request
+     */
     public function run($request)
     {
         // Ensure this task is idempotent

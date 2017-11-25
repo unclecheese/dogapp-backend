@@ -6,6 +6,7 @@ use MyOrg\Model\Dog;
 use MyOrg\Model\DogBreed;
 use SilverStripe\Assets\Folder;
 use SilverStripe\Assets\File;
+use SilverStripe\Control\HTTPRequest;
 use SilverStripe\Dev\BuildTask;
 use Faker\Factory;
 use SilverStripe\Security\Member;
@@ -15,6 +16,11 @@ class PopulateTask extends BuildTask
 {
     private static $segment = 'populate-dogs';
 
+    /**
+     * Create some dogs to populate the DB
+     *
+     * @param HTTPRequest $request
+     */
     public function run($request)
     {
         // Ensure this task is idempotent
